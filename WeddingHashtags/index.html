@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+*************
+*** TO DO ***
+*************
+1. Ability to "like" hashtags so that they can be filtered by popularity
+2. Option to email results to the user
+3. Filter results to only show hashtags that use non-blank inputs
+4. Radio button to check if taking last name
+5. Format alert for blank inputs and not in dictionary
+7. Alliteration / slant rhyme / pronounce words not in the dictionary
+10. use string.test() to check internal rhymes
+11. variable to test strength of match, sort results
+12. have the ability to go back in the browser and enter names again.
+13. go through most popular names and add to dictionary if not there
+14. Update if string is not in dictionary so that it restarts
+15. Loading screen while generator is running
+18. Limit length of rhyming words to length of name; i.e. "justin" doesn't rhyme with "us"
+
+
+-->
+
+
+	<head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>WeddingHashtags</title>
+
+        <!-- CSS -->
+       	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,700">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css"> -->
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/media-queries.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/favicon.ico">
+        <!--
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+		-->
+		
+	</head>
+
+<body>
+
+        <!-- Loader -->
+    	<div class="loader">
+    		<div class="loader-img"></div>
+    	</div>
+		
+		<!-- Top menu -->
+
+   		<div class="navbar navbar-fixed-top">
+       		<div class="nav-content">
+          	<p>#WeddingHashtags</p>
+        	</div>
+    	</div>
+
+
+        <div class="top-content">
+
+            <!-- Welcome message -->
+            <div class="top-content-text">
+            	<hr class="style-one">
+            	<p>Welcome to #WeddingHashtags! This simple tool will create the perfect 
+            		wedding hashtag for your big day!</p>
+            </div>
+        <div>
+
+        
+        <!-- How it works -->
+        <div class="what-we-do-container section-container">
+        	<div class="container">
+	            <div class="row">
+	                <div class="col-sm-12 what-we-do section-description">
+	                    <h2>How it works</h2>
+	                    <p>
+	                    	#WeddingHashtags searches popular catch phrases and generates 
+	                    	creative hashtags that blend details of your wedding into the 
+	                    	phrases!
+	                    </p>
+	                </div>
+	            </div>
+	        </div>
+        </div> 
+
+
+        <!-- Wedding Details -->
+        <div class="contact-container section-container">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-sm-12 contact section-description">
+	                	<h2>Wedding Details</h2>
+	                    <p>
+	                    	Enter the details of your wedding below to create your custom 
+	                    	#WeddingHashtag! Please provide both full names, and any additional
+	                    	information that you want to be incorporated. For best results,
+	                    	please enter the most common spelling of your name.
+	                    </p>
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<div class="col-sm-12 contact-form wow">
+	                    <form>
+	                    	<div class="form-group">
+	                        	<input type="text" placeholder="Your First Name..." class="contact-email" id="name_user">
+	                        </div>
+	                    	<div class="form-group">
+	                        	<input type="text" placeholder="Your Last Name..." class="contact-email" id="sur_user">
+	                        </div>
+	                    	<div class="form-group">
+	                        	<input type="text" placeholder="Your Partner's First Name..." class="contact-email" id="name_partner">
+	                        </div>
+	                    	<div class="form-group">
+	                        	<input type="text" placeholder="Your Partner's Last Name..." class="contact-email" id="sur_partner">
+	                        </div>	
+	                        <div class="form-group">
+	                        	<input type="text" placeholder="Venue / Setting..." class="contact-email" id="venue">
+	                        </div>	                        	                        
+	                    <button type="submit" class="btn" onclick="RunGenerator()">Submit!</button></a>
+	                    </form>
+
+	            	</div>
+	            </div>
+	        </div>
+        </div>   
+        
+        <!-- Hashtag Results -->
+        <div class="what-we-do-container section-container" id="results">
+        	<div class="container">
+	            <div class="row">
+	                <div class="col-sm-12 what-we-do section-description wow fadeIn">
+	                    <h2 id="results_heading">
+	                    <img src="assets/img/Loading_icon.gif" alt="Loading...">
+	                    </h2>
+	                </div>
+	            </div>
+	            <div class="row">
+                	<div class="col-sm-6 what-we-do-box wow">
+	                    <h3 id="custom_heading"></h3>
+	                    <p id="custom_hashtags"></p>
+                    </div>
+                    <div class="col-sm-6 what-we-do-box wow">
+	                	<h3 id="classic_heading"></h3>
+	                    <p id="classic_hashtags"></p>
+                    </div>
+	            </div>
+	        </div>
+        </div>         
+
+                 
+        <!-- Contact us -->
+        <div class="contact-container section-container section-container-gray" id="contact">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-sm-12 contact section-description">
+	                	<h2>Contact us</h2>
+	                    <p>
+	                    	Please send us any feedback on the hashtags! We'd love to hear from you!
+	                    </p>
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<div class="col-sm-12 contact-form">
+	                    <form role="form" action="assets/contact.php" method="post">
+	                    	<div class="form-group">
+	                    		<label class="sr-only" for="contact-email">Email</label>
+	                        	<input type="text" name="email" placeholder="Email..." class="contact-email" id="contact-email">
+	                        </div>
+	                        <div class="form-group">
+	                        	<label class="sr-only" for="contact-subject">Subject</label>
+	                        	<input type="text" name="subject" placeholder="Subject..." class="contact-subject" id="contact-subject">
+	                        </div>
+	                        <div class="form-group">
+	                        	<label class="sr-only" for="contact-message">Message</label>
+	                        	<textarea name="message" placeholder="Message..." class="contact-message" id="contact-message"></textarea>
+	                        </div>
+	                        <button type="submit" class="btn">Send message</button>
+	                    </form>
+	            	</div>
+	            </div>
+	        </div>
+        </div>    
+
+		<!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <!-- <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/retina-1.1.0.min.js"></script> -->
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <!--<script src="assets/js/masonry.pkgd.min.js"></script> -->
+        <script src="assets/js/scripts.js"></script>
+        
+        <script src="parsing/dictionary.js"></script> 
+       	<script src="parsing/phrases.js"></script>
+		<script src="rhyme.js"></script>       
+        <script src="hashtag.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+</body>
+</html>
